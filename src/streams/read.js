@@ -1,10 +1,14 @@
 import fs from "fs";
 import path from "node:path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const read = async () => {
     try {
         const readStream = fs.createReadStream(
-            path.join(path.dirname("./"), "files", "fileToRead.txt")
+            path.join(__dirname, "files", "fileToRead.txt")
         );
 
         readStream.on("error", (err) => {

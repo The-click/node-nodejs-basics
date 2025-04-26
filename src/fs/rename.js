@@ -1,18 +1,14 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const rename = async () => {
     try {
-        const oldFilePath = path.join(
-            path.dirname("./"),
-            "files",
-            "wrongFilename.txt"
-        );
-        const newFilePath = path.join(
-            path.dirname("./"),
-            "files",
-            "properFilename.md"
-        );
+        const oldFilePath = path.join(__dirname, "files", "wrongFilename.txt");
+        const newFilePath = path.join(__dirname, "files", "properFilename.md");
 
         if (await isFileExist(newFilePath)) {
             const error = new Error("File already exists");

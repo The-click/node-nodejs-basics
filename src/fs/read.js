@@ -1,14 +1,13 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const read = async () => {
     try {
-        const filePath = path.join(
-            path.dirname("./"),
-            "files",
-            "fileToRead.txt"
-        );
-
+        const filePath = path.join(__dirname, "files", "fileToRead.txt");
         const contents = await fs.readFile(filePath, { encoding: "utf8" });
 
         console.log(contents);

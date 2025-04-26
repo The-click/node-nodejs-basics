@@ -1,9 +1,13 @@
 import { fork } from "node:child_process";
 import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const spawnChildProcess = async (args) => {
     try {
-        const filePath = path.join(path.dirname("./"), "files", "script.js");
+        const filePath = path.join(__dirname, "files", "script.js");
         const child = fork(filePath, args, { stdio: "pipe" });
 
         child.stdout.on("data", (data) => {
