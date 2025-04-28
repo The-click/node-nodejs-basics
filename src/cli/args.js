@@ -1,17 +1,18 @@
+import util from "node:util";
+
 const parseArgs = () => {
-    const argumentsList = [];
-    let propString = "";
+    try {
+        const { values, positionals } = util.parseArgs({ strict: false });
+        let returnSting = [];
 
-    process.argv.slice(2).forEach((arg) => {
-        if (arg.startsWith("--")) {
-            propString = arg;
-        } else {
-            propString += " is " + arg;
-            argumentsList.push(propString);
-        }
-    });
+        Object.keys(values).forEach((key, index) =>
+            returnSting.push(`--${key} is ${positionals[index]}`)
+        );
 
-    console.log(argumentsList.join(","));
+        console.log(returnSting.join(", "));
+    } catch (e) {
+        console.log(e);
+    }
 };
 
 parseArgs();
